@@ -1,0 +1,1921 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>МИБиУ — Apple iOS UI</title>
+  <style>
+    :root, html[data-theme="dark"] {
+      --shell-outside: #050507;
+      --bg: #0D0E12;
+      --surface: #171920;
+      --nav-surface: rgba(23,25,32,.82);
+      --sheet-surface: rgba(23,25,32,.96);
+      --dock-border: rgba(255,255,255,.14);
+      --border: rgba(255,255,255,.08);
+      --soft-surface: rgba(255,255,255,.04);
+      --muted-surface: #2A2D36;
+      --toggle-thumb: #94A3B8;
+      --input-fill: #222631;
+      --input-border: rgba(255,255,255,.14);
+      --on-accent: #FFFFFF;
+      --on-accent-soft: rgba(255,255,255,.85);
+      --shimmer: rgba(255,255,255,.45);
+      --shell-shadow: rgba(0,0,0,.55);
+      --card-shadow: none;
+      --title: #F8FAFC;
+      --muted: #94A3B8;
+      --accent: #3B82F6;
+      --accent-soft: rgba(59,130,246,.12);
+      --accent-border: rgba(59,130,246,.28);
+      --accent-strong: rgba(59,130,246,.45);
+      --live-gradient: linear-gradient(135deg, rgba(59,130,246,.14), #171920 72%);
+      --live-border: rgba(59,130,246,.35);
+      --live-divider: rgba(255,255,255,.06);
+      --live-tag: rgba(255,255,255,.05);
+      --live-tag-border: rgba(255,255,255,.08);
+      --progress-gradient: linear-gradient(90deg,#3B82F6,#60A5FA);
+      --progress-glow: rgba(59,130,246,.5);
+      --success: #22C55E;
+      --success-soft: rgba(34,197,94,.14);
+      --success-border: rgba(34,197,94,.28);
+      --logout: #EF4444;
+      --logout-soft: rgba(239,68,68,.07);
+      --logout-border: rgba(239,68,68,.24);
+      --lecture: #3B82F6;
+      --practice: #38BDF8;
+      --seminar: #A78BFA;
+      --online: #34D399;
+      --important: #F87171;
+      --warning: #FBBF24;
+      --warning-soft: rgba(251,191,36,.12);
+      --warning-border: rgba(251,191,36,.28);
+      --session: #3B82F6;
+      --event: #38BDF8;
+      --important-soft: rgba(248,113,113,.14);
+      --session-soft: rgba(59,130,246,.14);
+      --event-soft: rgba(56,189,248,.14);
+      --seminar-soft: rgba(167,139,250,.14);
+      --online-soft: rgba(52,211,153,.14);
+      --lecture-border: rgba(59,130,246,.28);
+      --practice-border: rgba(56,189,248,.28);
+      --seminar-border: rgba(167,139,250,.28);
+      --online-border: rgba(52,211,153,.28);
+      --important-border: rgba(248,113,113,.28);
+      --session-border: rgba(59,130,246,.28);
+      --event-border: rgba(56,189,248,.28);
+    }
+    html[data-theme="light"] {
+      --shell-outside: #E7E9EE;
+      --bg: #F5F6F8;
+      --surface: #FFFFFF;
+      --nav-surface: rgba(255,255,255,.85);
+      --sheet-surface: rgba(255,255,255,.96);
+      --dock-border: rgba(0,0,0,.06);
+      --border: rgba(0,0,0,.06);
+      --soft-surface: rgba(0,0,0,.03);
+      --muted-surface: #E2E8F0;
+      --toggle-thumb: #64748B;
+      --input-fill: #F8FAFC;
+      --input-border: rgba(15,23,42,.20);
+      --on-accent: #FFFFFF;
+      --on-accent-soft: rgba(255,255,255,.85);
+      --shimmer: rgba(255,255,255,.5);
+      --shell-shadow: rgba(15,23,42,.10);
+      --card-shadow: 0 4px 12px rgba(15,23,42,.06);
+      --title: #0F172A;
+      --muted: #64748B;
+      --accent: #2563EB;
+      --accent-soft: rgba(37,99,235,.10);
+      --accent-border: rgba(37,99,235,.25);
+      --accent-strong: rgba(37,99,235,.40);
+      --live-gradient: linear-gradient(135deg, rgba(37,99,235,.08), #FFFFFF 72%);
+      --live-border: rgba(37,99,235,.35);
+      --live-divider: rgba(15,23,42,.06);
+      --live-tag: rgba(15,23,42,.04);
+      --live-tag-border: rgba(15,23,42,.08);
+      --progress-gradient: linear-gradient(90deg,#2563EB,#60A5FA);
+      --progress-glow: rgba(37,99,235,.35);
+      --success: #16A34A;
+      --success-soft: rgba(22,163,74,.12);
+      --success-border: rgba(22,163,74,.25);
+      --logout: #DC2626;
+      --logout-soft: rgba(220,38,38,.07);
+      --logout-border: rgba(220,38,38,.28);
+      --lecture: #2563EB;
+      --practice: #0284C7;
+      --seminar: #7C3AED;
+      --online: #059669;
+      --important: #DC2626;
+      --warning: #D97706;
+      --warning-soft: rgba(217,119,6,.10);
+      --warning-border: rgba(217,119,6,.25);
+      --session: #2563EB;
+      --event: #0284C7;
+      --important-soft: rgba(220,38,38,.12);
+      --session-soft: rgba(37,99,235,.12);
+      --event-soft: rgba(2,132,199,.12);
+      --seminar-soft: rgba(124,58,237,.12);
+      --online-soft: rgba(5,150,105,.12);
+      --lecture-border: rgba(37,99,235,.5);
+      --practice-border: rgba(2,132,199,.5);
+      --seminar-border: rgba(124,58,237,.5);
+      --online-border: rgba(5,150,105,.5);
+      --important-border: rgba(220,38,38,.5);
+      --session-border: rgba(37,99,235,.5);
+      --event-border: rgba(2,132,199,.5);
+    }
+    html { --phone-width: 393px; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--shell-outside);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      color: var(--title);
+      padding: 12px;
+      -webkit-font-smoothing: antialiased;
+    }
+    .stage {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 12px; max-width: 100%;
+    }
+    .device-switcher {
+      display: inline-flex; gap: 2px; padding: 3px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 99px; box-shadow: var(--card-shadow);
+    }
+    .device-btn {
+      border: 0; border-radius: 99px; padding: 8px 12px;
+      background: transparent; color: var(--muted);
+      font: 600 11px/1 -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      white-space: nowrap; cursor: pointer;
+      transition: background .2s ease, color .2s ease;
+    }
+    .device-btn.active { background: var(--accent-soft); color: var(--accent); }
+    .status-bar {
+      position: relative; z-index: 10;
+      flex: 0 0 44px; height: 44px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 20px; background: var(--bg); color: var(--title);
+      font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums;
+    }
+    .dynamic-island {
+      position: absolute; left: 50%; top: 8px;
+      width: 104px; height: 26px; border-radius: 99px;
+      background: #000; transform: translateX(-50%);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+    }
+    .status-icons { display: flex; align-items: center; gap: 6px; min-width: 34px; justify-content: flex-end; }
+    .status-signal { font-size: 10px; letter-spacing: 1px; }
+    .status-battery {
+      position: relative; width: 20px; height: 10px;
+      border: 1px solid currentColor; border-radius: 3px; opacity: .9;
+    }
+    .status-battery::before {
+      content: ""; position: absolute; left: 1px; top: 1px; bottom: 1px;
+      width: 13px; border-radius: 2px; background: currentColor;
+    }
+    .status-battery::after {
+      content: ""; position: absolute; right: -3px; top: 3px;
+      width: 2px; height: 4px; border-radius: 0 2px 2px 0;
+      background: currentColor;
+    }
+    .home-indicator {
+      flex: 0 0 22px; height: 22px; display: grid; place-items: center;
+      background: var(--bg);
+    }
+    .home-indicator::after {
+      content: ""; width: 128px; height: 5px; border-radius: 99px;
+      background: var(--title); opacity: .85;
+    }
+    .sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+    .ico {
+      width: 21px; height: 21px; display: block; flex-shrink: 0;
+      fill: none; stroke: currentColor; stroke-width: 1.7;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+    .ico-sm { width: 15px; height: 15px; }
+    .ico-lg { width: 30px; height: 30px; }
+    .phone {
+      position: relative;
+      width: var(--phone-width);
+      max-width: 100%;
+      height: min(900px, calc(100vh - 72px));
+      background: var(--bg);
+      border-radius: 36px;
+      border: 1px solid var(--border);
+      box-shadow: 0 16px 40px var(--shell-shadow);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .phone.is-mini .appbar { padding-left: 14px; padding-right: 14px; }
+    .phone.is-mini .nav { margin-left: 12px; margin-right: 12px; }
+    .appbar {
+      position: relative; top: auto; z-index: 1;
+      padding: 14px 16px 12px;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -.4px;
+      background: var(--bg);
+      transition: padding .22s cubic-bezier(.2,.8,.2,1), font-size .22s cubic-bezier(.2,.8,.2,1);
+    }
+    .appbar.compact { padding: 10px 16px 8px; font-size: 18px; }
+    .appbar #title { display: block; transform-origin: left center; transition: transform .22s cubic-bezier(.2,.8,.2,1); }
+    .appbar.compact #title { transform: scale(.94); }
+    .appbar-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .schedule-controls {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 8px 6px; margin-top: 10px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0;
+    }
+    .appbar.compact .schedule-controls { margin-top: 6px; }
+    .group-badge {
+      max-width: 120px; height: 30px; padding: 0 9px; border-radius: 10px;
+      background: var(--soft-surface);
+      border: 1px solid var(--border); color: var(--muted); white-space: nowrap;
+      display: inline-flex; align-items: center; font-variant-numeric: tabular-nums;
+      overflow: hidden; text-overflow: ellipsis;
+    }
+    .bell-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      flex-shrink: 0; height: 30px; padding: 0 11px; border: 1px solid var(--accent-border);
+      border-radius: 12px; background: var(--accent-soft); color: var(--accent);
+      font: inherit; cursor: pointer;
+      transition: transform .2s cubic-bezier(.215,.61,.355,1), background .25s ease, border-color .25s ease;
+    }
+    .bell-btn:active { transform: scale(.92); }
+    .bell-btn .ico { width: 14px; height: 14px; }
+    .theme-toggle {
+      width: 36px; height: 36px; border-radius: 10px;
+      border: 1px solid var(--border); background: var(--surface);
+      color: var(--muted); display: grid; place-items: center; cursor: pointer;
+      transition: background .2s ease, color .2s ease;
+    }
+    .content {
+      flex: 1;
+      overflow: auto;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .content::-webkit-scrollbar { display: none; }
+    .nav {
+      position: relative; z-index: 9;
+      flex: 0 0 64px; height: 64px;
+      margin: 0 16px 8px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      align-items: center;
+      background: var(--nav-surface);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--dock-border);
+      border-radius: 32px;
+      box-shadow: 0 12px 32px var(--shell-shadow);
+      overflow: hidden;
+    }
+    .nav button {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      padding: 5px 0;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      letter-spacing: -.1px;
+      transition: transform .18s cubic-bezier(.34,1.56,.64,1);
+    }
+    .nav button:active { transform: scale(.92); }
+    .nav .icon {
+      width: 26px; height: 22px;
+      display: grid; place-items: center;
+      transition: transform .2s ease, filter .2s ease, color .2s ease;
+    }
+    .nav .dot {
+      width: 4px; height: 4px; border-radius: 50%;
+      background: transparent;
+      transition: background .2s ease, box-shadow .2s ease;
+    }
+    .nav .label {
+      max-width: 100%; font-size: 11px; font-weight: 500; color: var(--muted);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      transition: color .2s ease, font-weight .2s ease;
+    }
+    .nav button.active .icon {
+      color: var(--accent);
+      filter: drop-shadow(0 0 6px var(--accent-strong));
+    }
+    .nav button.active .dot {
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent-strong);
+    }
+    .nav button.active .label { color: var(--accent); font-weight: 600; }
+    .hidden { display: none !important; }
+    .pad { padding: 4px 16px 120px; }
+    #tab-2 .pad { padding-bottom: 105px; }
+
+    .now {
+      margin: 12px 16px 12px;
+      padding: 16px;
+      background: var(--live-gradient);
+      border-radius: 24px;
+      border: 1px solid var(--live-border);
+      box-shadow: var(--card-shadow);
+    }
+    .now-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .now-heading { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+    .now-caption {
+      font-size: 11px; font-weight: 700; color: var(--accent); letter-spacing: .7px;
+    }
+    .now-time-inline {
+      font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums;
+    }
+    .status-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 9px; border-radius: 99px;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-border);
+      font-size: 11px; font-weight: 600; color: var(--accent);
+      white-space: nowrap;
+    }
+    .live-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--success), var(--accent));
+      box-shadow: 0 0 8px var(--progress-glow);
+      animation: livePulse 1.2s ease-in-out infinite;
+    }
+    .now-title {
+      margin-top: 12px;
+      color: var(--title);
+      font-size: 18px; font-weight: 700; letter-spacing: -.3px; line-height: 1.2;
+    }
+    .now-tags {
+      margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px;
+    }
+    .now-tag {
+      max-width: 150px; display: inline-flex; align-items: center; gap: 5px;
+      padding: 5px 8px; border-radius: 99px;
+      background: var(--live-tag); border: 1px solid var(--live-tag-border);
+      color: var(--muted); font-size: 11px; font-weight: 500;
+      font-variant-numeric: tabular-nums; white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis;
+    }
+    .now-tag .ico { width: 12px; height: 12px; stroke-width: 2; color: var(--accent); }
+    .now-tag > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+    .now-meta {
+      margin-top: 14px; display: flex; justify-content: space-between;
+      font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums;
+    }
+    .bar {
+      margin-top: 8px; height: 6px; border-radius: 99px;
+      background: var(--border); overflow: hidden;
+      box-shadow: 0 0 10px var(--progress-glow);
+    }
+    .bar > span {
+      position: relative; display: block; width: 62%; height: 100%;
+      border-radius: 99px; background: var(--progress-gradient);
+      transition: width .9s linear; overflow: hidden;
+    }
+    .bar > span::after {
+      content: ""; position: absolute; inset: 0; width: 40%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
+      transform: translateX(-100%); animation: barShimmer 1.8s linear infinite;
+    }
+    @keyframes barShimmer { to { transform: translateX(350%); } }
+    .now-next {
+      margin-top: 14px; padding-top: 12px;
+      border-top: 1px solid var(--live-divider);
+      color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums;
+    }
+
+    .week { display: flex; flex-wrap: nowrap; gap: 6px; padding: 0 16px; }
+    .day {
+      flex: 1 1 0; min-width: 0; border: 0; border-radius: 16px; padding: 10px 0;
+      background: transparent; color: var(--title); cursor: pointer; text-align: center;
+      transition: background .2s cubic-bezier(.25,.46,.45,.94), color .2s cubic-bezier(.25,.46,.45,.94);
+    }
+    .day.active { background: var(--accent); color: var(--on-accent); }
+    .day .lbl { font-size: 11px; font-weight: 500; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; transition: color .2s cubic-bezier(.25,.46,.45,.94); }
+    .day.active .lbl { color: var(--on-accent-soft); }
+    .day .num { font-size: 17px; font-weight: 600; margin-top: 4px; font-variant-numeric: tabular-nums; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; transition: color .2s cubic-bezier(.25,.46,.45,.94); }
+
+    .timeline { padding: 12px 16px 120px; display: flex; flex-direction: column; gap: 12px; }
+    .lesson { display: grid; grid-template-columns: 52px 1fr; gap: 12px; }
+    .time { text-align: right; }
+    .time .start { font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .time .end { font-size: 12px; color: var(--muted); margin-top: 2px; font-variant-numeric: tabular-nums; }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: auto;
+      box-shadow: var(--card-shadow);
+    }
+    .card-main { display: flex; flex: 1; min-width: 0; height: auto; }
+    .stripe { width: 3px; flex-shrink: 0; }
+    .card-body { padding: 16px; flex: 1; min-width: 0; }
+    .meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; min-width: 0; }
+    .type { font-size: 11px; font-weight: 600; letter-spacing: .2px; height: 22px; display: inline-flex; align-items: center; padding: 0 9px; border-radius: 99px; }
+    .room { font-size: 12px; color: var(--muted); font-weight: 500; font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .subj { color: var(--title); font-size: 15px; font-weight: 600; letter-spacing: -.2px; line-height: 1.3; }
+    .room-line { margin-top: 6px; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; white-space: normal; }
+    .room { font-size: 12px; color: var(--muted); font-weight: 500; font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .empty {
+      min-height: 180px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 12px;
+      color: var(--muted); font-size: 15px; font-weight: 500;
+    }
+    .empty .ico { width: 40px; height: 40px; stroke-width: 1.4; }
+
+    .feed { display: flex; flex-direction: column; gap: 12px; }
+    .news { padding: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; box-shadow: var(--card-shadow); }
+    .news-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .badge { font-size: 11px; font-weight: 600; padding: 0 10px; height: 22px; display: inline-flex; align-items: center; border-radius: 8px; letter-spacing: .2px; border: 1px solid var(--border); }
+    .date { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .news h3 { font-size: 16px; font-weight: 600; letter-spacing: -.2px; line-height: 1.3; margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .news p { font-size: 14px; color: var(--muted); line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+
+    .portal { padding: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; box-shadow: var(--card-shadow); }
+    .portal-row { display: flex; gap: 12px; align-items: center; }
+    .portal-ic {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--accent-soft); display: grid; place-items: center; color: var(--accent);
+    }
+    .portal h2 { font-size: 16px; font-weight: 600; letter-spacing: -.2px; }
+    .portal .url { font-size: 13px; color: var(--muted); margin-top: 2px; }
+    .status {
+      display: inline-flex; gap: 6px; align-items: center; margin-top: 14px;
+      padding: 6px 10px; border-radius: 8px; border: 1px solid var(--border);
+      background: var(--soft-surface); font-size: 12px; color: var(--muted);
+    }
+    .status .ico { color: var(--success); }
+    .status.pending .ico { color: var(--muted); }
+    .portal button {
+      width: 100%; margin-top: 16px; border: 0; border-radius: 14px; padding: 14px;
+      background: var(--accent); color: var(--on-accent); font-weight: 600; font-size: 15px; cursor: pointer; letter-spacing: -.2px;
+    }
+    .section { margin: 24px 0 12px; font-size: 15px; font-weight: 600; letter-spacing: -.2px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .qlink {
+      padding: 16px; min-height: 110px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 20px;
+      display: flex; flex-direction: column; cursor: pointer;
+      box-shadow: var(--card-shadow);
+    }
+    .qlink > .ico { color: var(--accent); margin-bottom: auto; }
+    .qlink .t { font-size: 15px; font-weight: 600; margin-top: 16px; letter-spacing: -.2px; }
+    .qlink .s { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    .task-card, .support-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
+      box-shadow: var(--card-shadow); overflow: hidden;
+    }
+    .support-card { margin-top: 24px; }
+    .task-row {
+      display: flex; align-items: flex-start; gap: 8px; padding: 12px 16px;
+      cursor: pointer; transition: background .2s ease, transform .1s ease;
+    }
+    .task-row:active { background: var(--muted-surface); transform: scale(.985); }
+    .task-row + .task-row { border-top: 1px solid var(--border); }
+    .task-main { flex: 1; min-width: 0; }
+    .task-title {
+      font-size: 13px; font-weight: 600; letter-spacing: -.2px; line-height: 1.25;
+    }
+    .task-badge {
+      flex: 0 0 auto; margin-top: 1px; padding: 4px 8px; border-radius: 8px;
+      border: 1px solid transparent; font-size: 11px; font-weight: 600; white-space: nowrap;
+    }
+    .task-badge.review { color: var(--warning); background: var(--warning-soft); border-color: var(--warning-border); }
+    .task-badge.available { color: var(--accent); background: var(--accent-soft); border-color: var(--accent-border); }
+    .task-badge.done { color: var(--success); background: var(--success-soft); border-color: var(--success-border); }
+
+    .support-head { display: flex; align-items: center; gap: 12px; padding: 14px 16px 12px; }
+    .support-ic {
+      width: 36px; height: 36px; border-radius: 10px; flex: 0 0 auto;
+      background: var(--accent-soft); display: grid; place-items: center; color: var(--accent);
+    }
+    .support-txt { flex: 1; min-width: 0; }
+    .support-txt .t { font-size: 14px; font-weight: 600; letter-spacing: -.2px; }
+    .support-txt .s { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .support-copy {
+      display: flex; align-items: center; gap: 10px; padding: 12px 16px;
+      border-top: 1px solid var(--border); cursor: pointer;
+      transition: background .2s ease, transform .1s ease;
+    }
+    .support-copy:active { background: var(--muted-surface); transform: scale(.985); }
+    .support-copy .ico { color: var(--accent); flex: 0 0 auto; }
+    .support-copy .email {
+      flex: 1; min-width: 0; font-size: 13px; font-weight: 600; color: var(--accent);
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .support-copy .action { font-size: 11px; color: var(--muted); }
+
+    .profile { margin-top: 24px; padding: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; text-align: center; box-shadow: var(--card-shadow); }
+    .avatar {
+      width: 72px; height: 72px; margin: 0 auto 14px; border-radius: 50%;
+      background: var(--accent-soft); border: 1px solid var(--accent-border);
+      display: grid; place-items: center; color: var(--accent);
+      font-size: 24px; font-weight: 600; letter-spacing: -.4px;
+    }
+    .avatar .ico { width: 34px; height: 34px; }
+    .profile h2 { font-size: 18px; font-weight: 600; letter-spacing: -.3px; }
+    .role { font-size: 13px; color: var(--muted); margin-top: 4px; }
+    .rows { margin-top: 18px; border-top: 1px solid var(--border); padding-top: 4px; text-align: left; }
+    .row { display: flex; justify-content: space-between; padding: 10px 0; font-size: 14px; }
+    .row span:first-child { color: var(--muted); }
+    .row span:last-child { font-weight: 600; font-variant-numeric: tabular-nums; }
+    .switch-card {
+      margin-top: 12px; padding: 14px 16px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 20px;
+      display: flex; align-items: center; gap: 12px;
+      box-shadow: var(--card-shadow);
+    }
+    .switch-card .ic {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--accent-soft); display: grid; place-items: center; color: var(--accent);
+    }
+    .switch-card .txt { flex: 1; min-width: 0; }
+    .switch-card .t { font-size: 15px; font-weight: 600; letter-spacing: -.2px; white-space: normal; }
+    .switch-card .s { font-size: 13px; color: var(--muted); margin-top: 2px; white-space: normal; }
+    .toggle {
+      width: 48px; height: 28px; border-radius: 999px; background: var(--muted-surface); border: 0;
+      position: relative; cursor: pointer;
+    }
+    .toggle.on { background: var(--accent); }
+    .toggle::after {
+      content: ""; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px;
+      border-radius: 50%; background: var(--toggle-thumb); transition: left .15s, background .2s ease;
+    }
+    .toggle.on::after { left: 23px; background: var(--on-accent); }
+
+    .group-card {
+      margin-top: 12px; padding: 14px 16px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 20px;
+      display: flex; align-items: center; gap: 12px;
+      box-shadow: var(--card-shadow); cursor: pointer;
+    }
+    .group-card .ic {
+      width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+      background: var(--accent-soft); color: var(--accent);
+      display: grid; place-items: center;
+    }
+    .group-card .txt { flex: 1; min-width: 0; }
+    .group-card .t { font-size: 15px; font-weight: 600; letter-spacing: -.2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .group-card .s { font-size: 12px; color: var(--muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .group-card .value { font-size: 15px; font-weight: 600; color: var(--accent); font-variant-numeric: tabular-nums; }
+    .group-card .chev { width: 16px; height: 16px; color: var(--muted); }
+
+    .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px; }
+    .metric {
+      padding: 14px 8px; background: var(--surface); text-align: center;
+      border: 1px solid var(--border); border-radius: 20px; box-shadow: var(--card-shadow);
+    }
+    .metric .v { font-size: 20px; font-weight: 700; letter-spacing: -.4px; font-variant-numeric: tabular-nums; }
+    .metric .l { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+    .section-label { margin: 20px 16px 10px; font-size: 15px; font-weight: 600; letter-spacing: -.2px; }
+    .sync-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; box-shadow: var(--card-shadow); overflow: hidden;
+    }
+    .sync-head { display: flex; align-items: center; gap: 10px; padding: 14px 16px 12px; }
+    .status-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--success);
+      box-shadow: 0 0 8px var(--success); flex-shrink: 0;
+    }
+    .status-dot.pending { background: var(--muted); box-shadow: 0 0 8px var(--muted); }
+    .sync-head .txt { flex: 1; min-width: 0; }
+    .sync-head .t { font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .sync-head .s { font-size: 12px; color: var(--muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .online-badge {
+      font-size: 10px; font-weight: 700; letter-spacing: .4px;
+      padding: 4px 8px; border-radius: 8px; color: var(--success);
+      background: var(--success-soft);
+    }
+    .online-badge.pending { color: var(--muted); background: var(--soft-surface); }
+    .action-row {
+      display: flex; align-items: center; gap: 12px; cursor: pointer;
+      padding: 12px 16px; border-top: 1px solid var(--border);
+      transition: transform .1s ease;
+    }
+    .action-row:active { transform: scale(.98); }
+    .action-row > .ico { color: var(--accent); width: 20px; height: 20px; }
+    .action-row .t { flex: 1; font-size: 14px; font-weight: 500; }
+    .action-row .chev { width: 16px; height: 16px; color: var(--muted); }
+    .action-row .ico.spin { animation: spin .8s linear; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .logout-card {
+      margin-top: 20px; padding: 16px; border-radius: 20px; text-align: center;
+      color: var(--logout); font-size: 15px; font-weight: 600; letter-spacing: -.2px;
+      background: var(--logout-soft);
+      border: 1px solid var(--logout-border);
+      cursor: pointer; transition: transform .1s ease;
+    }
+    .logout-card:active { transform: scale(.98); }
+    .logout-card .ico { width: 16px; height: 16px; vertical-align: middle; margin-right: 6px; }
+    .version { margin-top: 10px; text-align: center; font-size: 12px; color: var(--muted); }
+
+    .sheet-backdrop {
+      position: absolute; inset: 0; z-index: 25;
+      background: rgba(0,0,0,.36); opacity: 0; pointer-events: none;
+      transition: opacity .22s ease;
+    }
+    .sheet-backdrop.show { opacity: 1; pointer-events: auto; }
+    .sheet {
+      position: absolute; left: 0; right: 0; bottom: 22px; z-index: 26;
+      padding-bottom: 8px; transform: translateY(102%);
+      background: var(--sheet-surface);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border);
+      border-radius: 28px 28px 0 0;
+      transition: transform .32s cubic-bezier(.22,1,.36,1);
+    }
+    .sheet.show { transform: translateY(0); }
+    .sheet-grabber { width: 38px; height: 4px; margin: 10px auto; border-radius: 2px; background: var(--muted-surface); }
+    .sheet-head { display: flex; align-items: center; padding: 0 16px 4px; }
+    .sheet-head h3 { flex: 1; font-size: 18px; font-weight: 600; letter-spacing: -.3px; }
+    .sheet-close {
+      width: 36px; height: 36px; border: 0; border-radius: 10px; cursor: pointer;
+      background: transparent; color: var(--muted); display: grid; place-items: center;
+    }
+    .sheet-search { position: relative; margin: 4px 16px 12px; }
+    .sheet-search .ico { position: absolute; left: 13px; top: 12px; width: 20px; height: 20px; color: var(--muted); }
+    .sheet-search input {
+      width: 100%; box-sizing: border-box; border: 1px solid var(--input-border); outline: 0; border-radius: 14px;
+      padding: 12px 14px 12px 42px; font: inherit; font-size: 15px;
+      background: var(--input-fill); color: var(--title);
+    }
+    .sheet-search input:focus { border-color: var(--accent-border); }
+    .sheet-search input::placeholder { color: var(--muted); }
+    .sheet-list { max-height: 280px; overflow: auto; padding-bottom: 120px; }
+    .sheet-group {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 13px 16px; font-size: 15px; font-weight: 500; cursor: pointer;
+      border-top: 1px solid var(--border);
+    }
+    .sheet-group.active { color: var(--accent); font-weight: 600; background: var(--accent-soft); }
+    .sheet-group .ico { width: 18px; height: 18px; color: var(--accent); }
+    .sheet-empty { padding: 16px; text-align: center; font-size: 14px; color: var(--muted); }
+
+    .countdown-card {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
+      padding: 16px; background: var(--surface); border: 1px solid var(--accent);
+      border-radius: 20px; box-shadow: var(--card-shadow);
+    }
+    .countdown-card .ic {
+      width: 42px; height: 42px; border-radius: 12px; flex-shrink: 0;
+      background: var(--accent-soft); color: var(--accent);
+      display: grid; place-items: center;
+    }
+    .countdown-card .txt { flex: 1; min-width: 0; }
+    .countdown-card .t { font-size: 14px; font-weight: 600; letter-spacing: -.2px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .countdown-card .s { font-size: 12px; color: var(--muted); margin-top: 5px; font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .countdown-card .cnt { text-align: right; }
+    .countdown-card .days {
+      font-size: 24px; font-weight: 700; color: var(--accent);
+      letter-spacing: -.8px; font-variant-numeric: tabular-nums;
+    }
+    .countdown-card .days-l { font-size: 11px; color: var(--muted); }
+
+    .grade-summary {
+      display: flex; gap: 16px; margin: 4px 16px 14px; padding: 16px;
+      background: var(--soft-surface); border: 1px solid var(--border);
+      border-radius: 18px;
+    }
+    .grade-summary .col { flex: 1; }
+    .grade-summary .right { text-align: right; }
+    .grade-summary .lbl { font-size: 12px; color: var(--muted); }
+    .grade-summary .avg {
+      font-size: 28px; font-weight: 700; letter-spacing: -1px; margin-top: 4px;
+      font-variant-numeric: tabular-nums;
+    }
+    .grade-summary .progress-nums {
+      font-size: 13px; font-weight: 600; margin: 8px 0;
+      font-variant-numeric: tabular-nums;
+    }
+    .sheet-progress {
+      height: 4px; border-radius: 99px; overflow: hidden; background: var(--muted-surface);
+    }
+    .sheet-progress > span {
+      display: block; height: 100%; border-radius: 99px; background: var(--accent);
+      transition: width .35s cubic-bezier(.22,1,.36,1);
+    }
+    .grade-filters { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 0 16px 12px; }
+    .grade-filter {
+      border: 1px solid var(--border); background: var(--soft-surface); color: var(--muted);
+      border-radius: 12px; padding: 9px 4px; font-size: 11px; font-weight: 500;
+      cursor: pointer; transition: background .2s ease, color .2s ease, border-color .2s ease;
+    }
+    .grade-filter.active { background: var(--accent); color: var(--on-accent); border-color: var(--accent); font-weight: 600; }
+    .grade-list { max-height: 330px; overflow: auto; padding: 0 16px 120px; }
+    .subject {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 18px; margin-bottom: 10px; overflow: hidden;
+    }
+    .subject-head { display: flex; align-items: center; gap: 8px; padding: 16px; cursor: pointer; }
+    .subject-main { flex: 1; min-width: 0; }
+    .subject-title { font-size: 14px; font-weight: 600; letter-spacing: -.2px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .subject-meta { font-size: 12px; color: var(--muted); margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .subject-badge {
+      font-size: 10px; font-weight: 600; padding: 0 8px; height: 22px;
+      display: inline-flex; align-items: center; border-radius: 8px; white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+    .subject-badge.done { color: var(--success); background: var(--success-soft); }
+    .subject-badge.pass { color: var(--accent); background: var(--accent-soft); }
+    .subject-badge.wait { color: var(--muted); background: var(--soft-surface); }
+    .note-flag { color: var(--accent); width: 14px; height: 14px; }
+    .chev-rot { width: 18px; height: 18px; color: var(--muted); transition: transform .2s ease; }
+    .subject.open .chev-rot { transform: rotate(90deg); }
+    .subject-details {
+      max-height: 0; opacity: 0; overflow: hidden; padding: 0 16px;
+      transition: max-height .22s cubic-bezier(.22,1,.36,1), opacity .2s ease, padding .2s ease;
+    }
+    .subject.open .subject-details { max-height: 240px; opacity: 1; padding-bottom: 16px; }
+    .subject-details::before {
+      content: ""; display: block; height: 1px; background: var(--border); margin-bottom: 12px;
+    }
+    .mark-passed {
+      width: 100%; border: 1px solid var(--accent-border); border-radius: 12px;
+      background: var(--accent-soft); color: var(--accent);
+      padding: 10px; font-size: 13px; font-weight: 600; cursor: pointer;
+    }
+    .mark-passed:disabled { background: var(--soft-surface); border-color: var(--border); color: var(--muted); cursor: default; }
+    .note-input {
+      width: 100%; box-sizing: border-box; margin-top: 10px; border: 0; outline: 0;
+      border-radius: 12px; padding: 12px; resize: vertical; min-height: 52px;
+      background: var(--soft-surface); color: var(--title); font: inherit; font-size: 13px;
+    }
+    .note-input::placeholder { color: var(--muted); }
+    .save-note {
+      display: block; margin: 8px 0 0 auto; border: 0; border-radius: 10px;
+      background: var(--accent-soft); color: var(--accent);
+      padding: 8px 14px; font-size: 12px; font-weight: 600; cursor: pointer;
+    }
+
+    .bell-list { padding: 0 16px 120px; }
+    .bell-row {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 8px;
+      padding: 12px 14px; border-radius: 14px;
+      background: var(--soft-surface); border: 1px solid var(--border);
+    }
+    .bell-row.active { background: var(--accent-soft); border-color: var(--accent); }
+    .bell-num {
+      width: 28px; height: 28px; border-radius: 9px; flex-shrink: 0;
+      background: var(--muted-surface); display: grid; place-items: center;
+      font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums;
+    }
+    .bell-row.active .bell-num { background: var(--accent); color: var(--on-accent); }
+    .bell-main { flex: 1; }
+    .bell-title { font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .bell-time {
+      font-size: 12px; color: var(--muted); margin-top: 3px;
+      font-variant-numeric: tabular-nums;
+    }
+    .bell-row.active .bell-time { color: var(--accent); }
+    .bell-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+    .bell-dot.placeholder { background: transparent; }
+
+    .settings-group {
+      margin-top: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: var(--card-shadow);
+      overflow: hidden;
+    }
+    .settings-group .switch-card {
+      margin-top: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+    .test-reminder {
+      width: 100%;
+      border: 0;
+      border-top: 1px solid var(--border);
+      border-radius: 0;
+      background: transparent;
+      color: var(--accent);
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .test-reminder .ico { width: 18px; height: 18px; }
+    .banner {
+      position: absolute; top: 56px; left: 50%; z-index: 30;
+      transform: translate(-50%, -160%); opacity: 0;
+      background: var(--surface); border: 1px solid var(--border); color: var(--title);
+      font-size: 12px; font-weight: 600; padding: 10px 16px; border-radius: 18px;
+      display: flex; align-items: center; gap: 8px; white-space: normal;
+      max-width: calc(100% - 48px); text-align: center; pointer-events: none;
+      box-shadow: 0 10px 28px var(--shell-shadow);
+      transition: transform .34s cubic-bezier(.34,1.56,.64,1), opacity .2s ease;
+    }
+    .banner.show { transform: translate(-50%, 0); opacity: 1; }
+    .banner::before {
+      content: "✓"; color: var(--accent); font-size: 13px; font-weight: 700;
+    }
+    .refresh-indicator {
+      position: absolute; top: 56px; left: 50%; z-index: 25;
+      transform: translate(-50%, -160%); opacity: 0;
+      width: 26px; height: 26px; border-radius: 50%;
+      border: 2px solid var(--accent-soft); border-top-color: var(--accent);
+      transition: transform .2s ease, opacity .2s ease;
+    }
+    .refresh-indicator.show { transform: translate(-50%, 0); opacity: 1; animation: spin .8s linear infinite; }
+    @keyframes spin { to { transform: translate(-50%, 0) rotate(360deg); } }
+
+    .content { position: relative; }
+    .content section {
+      transition: opacity .22s cubic-bezier(.2,.8,.2,1), transform .22s cubic-bezier(.2,.8,.2,1);
+    }
+    .content section.tab-active {
+      position: relative; opacity: 1; transform: translateY(0); visibility: visible;
+    }
+    .content section.tab-hidden {
+      position: absolute; inset: 0; opacity: 0; transform: translateY(8px);
+      visibility: hidden; pointer-events: none;
+    }
+    .phone, .appbar, .now, .card, .news, .portal, .qlink,
+    .profile, .switch-card, .nav, .status {
+      transition: background .25s ease, color .25s ease, border-color .25s ease,
+                  box-shadow .25s ease, transform .1s ease;
+    }
+    .badge, .badge-type, .bell-row, .subject, .countdown-card,
+    .now-tag, .now-next, .bar, .grade-summary, .metric, .sheet-head,
+    .sheet-search input, .test-reminder {
+      transition: background .25s ease, color .25s ease, border-color .25s ease,
+                  box-shadow .25s ease;
+    }
+    .live-dot { animation: livePulse 1.2s ease-in-out infinite; }
+    @keyframes livePulse {
+      0%, 100% { opacity: .6; transform: scale(.6); }
+      50% { opacity: 1; transform: scale(1); }
+    }
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .lesson, .news, .qlink, .switch-card {
+      animation: cardIn .32s cubic-bezier(.22,1,.36,1) backwards;
+    }
+    .lesson .card, .news, .qlink, .portal button, .theme-toggle,
+    .nav button, .day, .toggle { cursor: pointer; }
+    .lesson .card:active, .news:active, .qlink:active, .portal button:active,
+    .theme-toggle:active, .day:active { transform: scale(.97); }
+    .day .lbl, .day .num { transition: font-size .2s cubic-bezier(.25,.46,.45,.94), color .2s cubic-bezier(.25,.46,.45,.94); }
+    .day.active .lbl { font-size: 12px; font-weight: 600; }
+    .day.active .num { font-size: 18.5px; }
+    .theme-icon-pop { animation: iconPop .25s cubic-bezier(.22,1,.36,1); }
+    @keyframes iconPop {
+      from { opacity: 0; transform: scale(.7) rotate(-20deg); }
+      to { opacity: 1; transform: scale(1) rotate(0); }
+    }
+    .badge-type {
+      font-size: 11px; font-weight: 600; letter-spacing: .2px;
+      height: 22px; padding: 0 9px; border-radius: 999px;
+      display: inline-flex; align-items: center;
+    }
+    .lesson-head { cursor: pointer; }
+    .lesson-details-wrap {
+      display: grid;
+      grid-template-rows: 0fr;
+      opacity: 0;
+      transition: grid-template-rows .26s cubic-bezier(.22,1,.36,1), opacity .22s ease;
+    }
+    .lesson.open .lesson-details-wrap { grid-template-rows: 1fr; opacity: 1; }
+    .lesson-details { min-height: 0; overflow: hidden; }
+    .lesson-details-inner {
+      margin: 0 16px 16px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .lesson.open .chev { transform: rotate(180deg); }
+    .chev { font-size: 18px; line-height: 1; transition: transform .26s cubic-bezier(.22,1,.36,1); }
+    .lesson-details input {
+      width: 100%; margin: 10px 0; padding: 10px 12px;
+      border-radius: 12px; border: 1px solid var(--border);
+      background: var(--soft-surface); color: var(--title);
+      font: inherit; font-size: 12px; outline: none;
+    }
+    .lesson-details input:focus { border-color: var(--accent-border); }
+    .detail-btn {
+      width: 100%; padding: 9px 12px; margin-top: 8px;
+      border-radius: 12px; border: 1px solid var(--border);
+      background: var(--accent-soft); color: var(--accent);
+      font-size: 12px; font-weight: 600; cursor: pointer;
+      transition: transform .1s ease, background .2s ease;
+    }
+    .detail-btn:active { transform: scale(.97); }
+    .detail-btn.secondary { background: transparent; color: var(--muted); }
+    .break-card {
+      margin-left: 64px; padding: 10px 13px; border-radius: 15px;
+      border: 1px dashed var(--border); background: var(--soft-surface);
+      display: flex; align-items: center; gap: 9px;
+      color: var(--muted); font-size: 12px; font-weight: 500;
+    }
+    .bar > span { position: relative; overflow: hidden; }
+    .bar > span::after {
+      content: ""; position: absolute; inset: 0;
+      transform: translateX(-100%);
+      background: linear-gradient(90deg, transparent, var(--shimmer), transparent);
+      animation: shimmer 1.8s linear infinite;
+    }
+    @keyframes shimmer { to { transform: translateX(100%); } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-calendar" viewBox="0 0 24 24">
+      <rect x="3" y="5" width="18" height="16" rx="3" />
+      <path d="M8 3v4M16 3v4M3 10h18" />
+    </symbol>
+    <symbol id="i-news" viewBox="0 0 24 24">
+      <rect x="4" y="4" width="16" height="16" rx="2.5" />
+      <path d="M8 8h8M8 12h8M8 16h5" />
+    </symbol>
+    <symbol id="i-school" viewBox="0 0 24 24">
+      <path d="M2.5 9.2 12 4.5l9.5 4.7L12 14 2.5 9.2Z" />
+      <path d="M6.5 11.5V16c0 1.7 2.5 3 5.5 3s5.5-1.3 5.5-3v-4.5M21.5 9.5v5.5" />
+    </symbol>
+    <symbol id="i-person" viewBox="0 0 24 24">
+      <circle cx="12" cy="8" r="3.6" />
+      <path d="M5 20c0-3.4 3.1-5.6 7-5.6s7 2.2 7 5.6" />
+    </symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z" />
+    </symbol>
+    <symbol id="i-book" viewBox="0 0 24 24">
+      <path d="M5 4h11a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2V4Z" />
+      <path d="M8.5 8H15M8.5 12H15" />
+    </symbol>
+    <symbol id="i-quiz" viewBox="0 0 24 24">
+      <rect x="5" y="3" width="14" height="18" rx="3" />
+      <path d="M9 8h6M9 12h6M9 16h3" />
+    </symbol>
+    <symbol id="i-card" viewBox="0 0 24 24">
+      <rect x="3" y="6" width="18" height="12" rx="3" />
+      <path d="M3 10h18M7 15h4" />
+    </symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24">
+      <path d="M7 3h7l4 4v14H7V3Z" />
+      <path d="M14 3v5h4M10 13h5M10 17h5" />
+    </symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24">
+      <path d="M18 9a6 6 0 0 0-12 0c0 6-2 7-2 7h16s-2-1-2-7Z" />
+      <path d="M10 20a2 2 0 0 0 4 0" />
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" />
+      <path d="m8 12 2.5 2.5L16 9" />
+    </symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+    </symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24">
+      <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z" />
+    </symbol>
+    <symbol id="i-groups" viewBox="0 0 24 24">
+      <circle cx="9" cy="8" r="3" />
+      <path d="M3 19c0-3 2.7-5 6-5s6 2 6 5" />
+      <path d="M16 11a3 3 0 1 0-1-5.8M17 14c2.4.4 4 2.2 4 5" />
+    </symbol>
+    <symbol id="i-search" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="6.5" />
+      <path d="m16 16 4.5 4.5" />
+    </symbol>
+    <symbol id="i-sync" viewBox="0 0 24 24">
+      <path d="M20 11a8 8 0 0 0-14-4.5L4 9" />
+      <path d="M4 5v4h4" />
+      <path d="M4 13a8 8 0 0 0 14 4.5L20 15" />
+      <path d="M20 19v-4h-4" />
+    </symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24">
+      <path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v5M14 11v5" />
+    </symbol>
+    <symbol id="i-logout" viewBox="0 0 24 24">
+      <path d="M10 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4M14 8l4 4-4 4M18 12H9" />
+    </symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24">
+      <path d="m9 5 7 7-7 7" />
+    </symbol>
+    <symbol id="i-close" viewBox="0 0 24 24">
+      <path d="m6 6 12 12M18 6 6 18" />
+    </symbol>
+    <symbol id="i-note" viewBox="0 0 24 24">
+      <path d="M6 3h9l4 4v14H6V3Z" />
+      <path d="M15 3v5h4M9 12h6M9 16h4" />
+    </symbol>
+    <symbol id="i-alarm" viewBox="0 0 24 24">
+      <circle cx="12" cy="13" r="7" />
+      <path d="M12 10v3l2 2M5 4 2.5 6.5M19 4l2.5 2.5M9 22h6" />
+    </symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24">
+      <rect x="9" y="9" width="11" height="11" rx="2.5" />
+      <path d="M5 15H4.5A1.5 1.5 0 0 1 3 13.5v-9A1.5 1.5 0 0 1 4.5 3h9A1.5 1.5 0 0 1 15 4.5V5" />
+    </symbol>
+  </svg>
+
+  <div class="stage">
+    <div class="device-switcher" role="group" aria-label="Модель iPhone">
+      <button class="device-btn" data-width="375" type="button">iPhone Mini (375px)</button>
+      <button class="device-btn active" data-width="393" type="button">iPhone 16 Pro (393px)</button>
+    </div>
+    <div class="phone" id="phone">
+      <div class="status-bar">
+        <span class="status-time">9:41</span>
+        <span class="dynamic-island"></span>
+        <span class="status-icons"><span class="status-signal">▮▮▮</span><span class="status-battery"></span></span>
+      </div>
+    <div class="refresh-indicator" id="refresh-indicator"></div>
+    <div class="content" id="content">
+      <div class="appbar" id="appbar">
+        <div class="appbar-row">
+          <span id="title">Расписание</span>
+          <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Светлая тема">
+            <svg class="ico"><use id="theme-icon" href="#i-sun"></use></svg>
+          </button>
+        </div>
+        <div class="schedule-controls" id="schedule-controls">
+          <span class="group-badge">МН-21</span>
+          <button class="bell-btn" id="bell-open" type="button">
+            <svg class="ico"><use href="#i-bell"></use></svg>
+            <span>Звонки</span>
+          </button>
+        </div>
+      </div>
+      <section id="tab-0" class="tab-active">
+        <div class="now" id="now-card">
+          <div class="now-top">
+            <div class="now-heading">
+              <span class="now-caption">СЕЙЧАС ИДЕТ</span>
+              <span class="now-time-inline" id="now-time-inline"></span>
+            </div>
+            <span class="status-pill"><span class="live-dot"></span>Идет пара</span>
+          </div>
+          <div class="now-title" id="now-title"></div>
+          <div class="now-tags">
+            <span class="now-tag"><svg class="ico"><use href="#i-calendar"></use></svg><span id="now-room"></span></span>
+            <span class="now-tag"><svg class="ico"><use href="#i-book"></use></svg><span id="now-type"></span></span>
+            <span class="now-tag"><svg class="ico"><use href="#i-person"></use></svg><span id="now-teacher"></span></span>
+          </div>
+          <div class="now-meta">
+            <span id="now-remaining">Осталось 34 мин</span>
+            <span id="now-percent">62%</span>
+          </div>
+          <div class="bar"><span id="now-bar"></span></div>
+          <div class="now-next" id="now-next"></div>
+        </div>
+        <div class="week" id="week"></div>
+        <div class="timeline" id="timeline"></div>
+      </section>
+      <section id="tab-1" class="tab-hidden"><div class="pad feed" id="news"></div></section>
+      <section id="tab-2" class="tab-hidden">
+        <div class="pad">
+          <div class="countdown-card">
+            <div class="ic"><svg class="ico"><use href="#i-calendar"></use></svg></div>
+            <div class="txt">
+              <div class="t">Экзамен • Экономика и управление</div>
+              <div class="s" id="countdown-date">Ауд. 304</div>
+            </div>
+            <div class="cnt">
+              <div class="days" id="countdown-days">12 дн.</div>
+              <div class="days-l">до сессии</div>
+            </div>
+          </div>
+          <div class="portal">
+            <div class="portal-row">
+              <div class="portal-ic"><svg class="ico ico-lg"><use href="#i-globe"></use></svg></div>
+              <div>
+                <h2>Портал МИБиУ</h2>
+                <div class="url">https://lk.mibiu.ru</div>
+              </div>
+            </div>
+            <div class="status pending" id="portal-status">
+              <svg class="ico ico-sm"><use href="#i-alarm"></use></svg>
+              Ожидает входа
+            </div>
+            <button type="button" id="portal-button">Открыть портал МИБиУ</button>
+          </div>
+          <div class="section">Быстрые разделы</div>
+          <div class="grid" id="quick-links">
+            <div class="qlink" style="animation-delay:60ms" data-title="Зачетка"><svg class="ico ico-lg"><use href="#i-book"></use></svg><div class="t">Зачетка</div><div class="s">Оценки и зачёты</div></div>
+            <div class="qlink" style="animation-delay:110ms" data-title="Тесты"><svg class="ico ico-lg"><use href="#i-quiz"></use></svg><div class="t">Тесты</div><div class="s">Контроль знаний</div></div>
+            <div class="qlink" style="animation-delay:160ms" data-title="Оплата"><svg class="ico ico-lg"><use href="#i-card"></use></svg><div class="t">Оплата</div><div class="s">Квитанции</div></div>
+            <div class="qlink" style="animation-delay:210ms" data-title="Справки"><svg class="ico ico-lg"><use href="#i-doc"></use></svg><div class="t">Справки</div><div class="s">Документы</div></div>
+          </div>
+          <div class="section">Задания и контроль</div>
+          <div class="task-card" id="cabinet-tasks">
+            <div class="task-row" data-task="Курсовая работа • Экономика и управление">
+              <div class="task-main"><div class="task-title">Курсовая работа • Экономика и управление</div></div>
+              <div class="task-badge review">На проверке</div>
+            </div>
+            <div class="task-row" data-task="Итоговый тест • Правоведение">
+              <div class="task-main"><div class="task-title">Итоговый тест • Правоведение</div></div>
+              <div class="task-badge available">Доступен</div>
+            </div>
+            <div class="task-row" data-task="Реферат • Менеджмент">
+              <div class="task-main"><div class="task-title">Реферат • Менеджмент</div></div>
+              <div class="task-badge done">Зачтено</div>
+            </div>
+          </div>
+          <div class="support-card" id="support-card">
+            <div class="support-head">
+              <div class="support-ic"><svg class="ico"><use href="#i-alarm"></use></svg></div>
+              <div class="support-txt">
+                <div class="t">Деканат и поддержка</div>
+                <div class="s">Пн–Пт • 09:00–18:00</div>
+              </div>
+            </div>
+            <div class="support-copy" id="copy-email">
+              <svg class="ico ico-sm"><use href="#i-copy"></use></svg>
+              <div class="email">dekanat@mibiu.ru</div>
+              <div class="action">Копировать</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="tab-3" class="tab-hidden">
+        <div class="pad">
+          <div class="profile">
+            <div class="avatar">СА</div>
+            <h2>Смирнова Анна Дмитриевна</h2>
+            <div class="role">Студент МИБиУ</div>
+            <div class="rows">
+              <div class="row"><span>Курс</span><span>2 курс</span></div>
+              <div class="row"><span>Форма обучения</span><span>Очная</span></div>
+              <div class="row"><span>Направление</span><span>Менеджмент</span></div>
+            </div>
+          </div>
+          <div class="group-card" id="group-picker-open">
+            <div class="ic"><svg class="ico"><use href="#i-groups"></use></svg></div>
+            <div class="txt">
+              <div class="t">Моя учебная группа</div>
+              <div class="s">Нажмите для выбора</div>
+            </div>
+            <div class="value" id="group-value">МН-21</div>
+            <svg class="ico chev"><use href="#i-chevron"></use></svg>
+          </div>
+          <div class="metrics">
+            <div class="metric"><div class="v" id="profile-average">4.75</div><div class="l">Средний балл</div></div>
+            <div class="metric"><div class="v">6/8</div><div class="l">Сессия</div></div>
+            <div class="metric"><div class="v">2</div><div class="l">Курс</div></div>
+          </div>
+          <div class="switch-card">
+            <div class="ic"><svg class="ico"><use href="#i-bell"></use></svg></div>
+            <div class="txt">
+              <div class="t">Уведомления об изменении расписания</div>
+              <div class="s">Push при переносе или отмене пар</div>
+            </div>
+            <button class="toggle on" id="notif" type="button" aria-label="Уведомления"></button>
+          </div>
+          <div class="settings-group">
+            <div class="switch-card">
+              <div class="ic"><svg class="ico"><use href="#i-alarm"></use></svg></div>
+              <div class="txt">
+                <div class="t">Напоминать за 15 мин до пары</div>
+                <div class="s">Уведомлять о следующей аудитории и корпусе</div>
+              </div>
+              <button class="toggle" id="reminder-profile-toggle" type="button" aria-label="Напоминания за 15 минут"></button>
+            </div>
+            <button class="test-reminder" id="test-reminder" type="button">
+              <svg class="ico"><use href="#i-bell"></use></svg>
+              <span>Проверить уведомление</span>
+            </button>
+          </div>
+          <div class="switch-card">
+            <div class="ic"><svg class="ico"><use id="theme-profile-icon" href="#i-moon"></use></svg></div>
+            <div class="txt">
+              <div class="t">Темная тема</div>
+              <div class="s" id="theme-subtitle">Тёмное оформление включено</div>
+            </div>
+            <button class="toggle on" id="dark-toggle" type="button" aria-label="Темная тема"></button>
+          </div>
+          <div class="section-label">Синхронизация и данные</div>
+          <div class="sync-card">
+            <div class="sync-head" id="sync-head">
+              <div class="status-dot pending" id="sync-dot"></div>
+              <div class="txt">
+                <div class="t" id="sync-title">Ожидает входа</div>
+                <div class="s">lk.mibiu.ru</div>
+              </div>
+              <div class="online-badge pending" id="sync-badge">WAIT</div>
+            </div>
+            <div class="action-row" id="sync-schedule">
+              <svg class="ico" id="sync-icon"><use href="#i-sync"></use></svg>
+              <div class="t">Принудительно обновить расписание</div>
+              <svg class="ico chev"><use href="#i-chevron"></use></svg>
+            </div>
+            <div class="action-row" id="clear-cache">
+              <svg class="ico"><use href="#i-trash"></use></svg>
+              <div class="t">Очистить локальный кэш</div>
+              <svg class="ico chev"><use href="#i-chevron"></use></svg>
+            </div>
+          </div>
+          <div class="logout-card" id="logout">
+            <svg class="ico"><use href="#i-logout"></use></svg>
+            Выйти из аккаунта МИБиУ
+          </div>
+          <div class="version">МИБиУ Клиент • v1.0.0</div>
+        </div>
+      </section>
+    </div>
+    <nav class="nav" id="nav"></nav>
+    <div class="sheet-backdrop" id="sheet-backdrop"></div>
+    <div class="sheet" id="group-sheet">
+      <div class="sheet-grabber"></div>
+      <div class="sheet-head">
+        <h3>Выберите группу</h3>
+        <button class="sheet-close" id="sheet-close" type="button" aria-label="Закрыть"><svg class="ico"><use href="#i-close"></use></svg></button>
+      </div>
+      <div class="sheet-search">
+        <svg class="ico"><use href="#i-search"></use></svg>
+        <input id="group-search" type="text" placeholder="Поиск группы" autocomplete="off" />
+      </div>
+      <div class="sheet-list" id="group-list"></div>
+    </div>
+    <div class="sheet-backdrop" id="gradebook-backdrop"></div>
+    <div class="sheet" id="gradebook-sheet">
+      <div class="sheet-grabber"></div>
+      <div class="sheet-head">
+        <h3>Электронная зачетка</h3>
+        <button class="sheet-close" id="gradebook-close" type="button" aria-label="Закрыть"><svg class="ico"><use href="#i-close"></use></svg></button>
+      </div>
+      <div class="grade-summary">
+        <div class="col">
+          <div class="lbl">Средний балл</div>
+          <div class="avg" id="grade-average">4.75</div>
+        </div>
+        <div class="col right">
+          <div class="lbl">Семестр закрыт</div>
+          <div class="progress-nums" id="grade-progress">6 из 8 предметов</div>
+          <div class="sheet-progress"><span id="grade-progress-bar" style="width:75%"></span></div>
+        </div>
+      </div>
+      <div class="grade-filters" id="grade-filters">
+        <button class="grade-filter active" data-filter="all" type="button">Все</button>
+        <button class="grade-filter" data-filter="done" type="button">Сдано</button>
+        <button class="grade-filter" data-filter="pending" type="button">Долги / Ожидают</button>
+      </div>
+      <div class="grade-list" id="grade-list"></div>
+    </div>
+    <div class="sheet-backdrop" id="bell-backdrop"></div>
+    <div class="sheet" id="bell-sheet">
+      <div class="sheet-grabber"></div>
+      <div class="sheet-head">
+        <h3>Расписание звонков</h3>
+        <button class="sheet-close" id="bell-close" type="button" aria-label="Закрыть"><svg class="ico"><use href="#i-close"></use></svg></button>
+      </div>
+      <div class="bell-list" id="bell-list"></div>
+    </div>
+    <div class="banner" id="toast"></div>
+    <div class="home-indicator"></div>
+    </div>
+  </div>
+
+  <script>
+    const deviceButtons = document.querySelectorAll(".device-btn");
+    deviceButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        deviceButtons.forEach((item) => item.classList.toggle("active", item === button));
+        document.documentElement.style.setProperty("--phone-width", `${button.dataset.width}px`);
+        document.getElementById("phone").classList.toggle("is-mini", button.dataset.width === "375");
+      });
+    });
+
+    const titles = ["Расписание", "Новости", "Кабинет", "Профиль"];
+    const navItems = [
+      { label: "Расписание", icon: "calendar" },
+      { label: "Новости", icon: "news" },
+      { label: "Кабинет", icon: "school" },
+      { label: "Профиль", icon: "person" },
+    ];
+    const days = [
+      { label: "Пн", date: "17" }, { label: "Вт", date: "18" },
+      { label: "Ср", date: "19" }, { label: "Чт", date: "20" },
+      { label: "Пт", date: "21" }, { label: "Сб", date: "22" },
+    ];
+    const lessons = {
+      0: [
+        { start: "09:00", end: "10:30", subject: "Экономика и управление", type: "Лекция", room: "Ауд. 304", teacher: "Иванова М. А.", tone: "lecture" },
+        { start: "10:40", end: "12:10", subject: "Менеджмент организации", type: "Практика", room: "Ауд. 212", teacher: "Петров С. В.", tone: "practice" },
+        { start: "13:30", end: "15:00", subject: "Финансовый учёт и анализ", type: "Онлайн", room: "Онлайн", teacher: "Сидорова Е. Н.", tone: "online" },
+      ],
+      1: [
+        { start: "09:00", end: "10:30", subject: "Правовое регулирование бизнеса", type: "Лекция", room: "Ауд. 108", teacher: "Козлов А. Д.", tone: "lecture" },
+        { start: "10:40", end: "12:10", subject: "Маркетинг и коммуникации", type: "Практика", room: "Ауд. 401", teacher: "Николаева О. И.", tone: "practice" },
+      ],
+      2: [
+        { start: "10:40", end: "12:10", subject: "Информационные технологии", type: "Практика", room: "Комп. класс 2", teacher: "Иванова М. А.", tone: "practice" },
+        { start: "12:30", end: "14:00", subject: "Деловой английский", type: "Семинар", room: "Ауд. 215", teacher: "Brown J.", tone: "seminar" },
+      ],
+      3: [
+        { start: "09:00", end: "10:30", subject: "Финансовый учёт и анализ", type: "Практика", room: "Ауд. 310", teacher: "Сидорова Е. Н.", tone: "practice" },
+        { start: "10:40", end: "12:10", subject: "Менеджмент организации", type: "Лекция", room: "Онлайн", teacher: "Петров С. В.", tone: "lecture" },
+        { start: "12:30", end: "14:00", subject: "Стратегическое планирование", type: "Семинар", room: "Ауд. 501", teacher: "Орлова Т. К.", tone: "seminar" },
+      ],
+      4: [
+        { start: "09:00", end: "10:30", subject: "Маркетинг и коммуникации", type: "Лекция", room: "Ауд. 401", teacher: "Николаева О. И.", tone: "lecture" },
+      ],
+      5: [
+        { start: "10:40", end: "12:10", subject: "Проектный семинар", type: "Семинар", room: "Онлайн", teacher: "Орлова Т. К.", tone: "seminar" },
+      ],
+    };
+    const bells = [
+      { number: 1, start: "09:00", end: "10:30", breakAfter: "10 мин" },
+      { number: 2, start: "10:40", end: "12:10", breakAfter: "20 мин" },
+      { number: 3, start: "12:30", end: "14:00", breakAfter: "10 мин" },
+      { number: 4, start: "14:10", end: "15:40", breakAfter: "10 мин" },
+      { number: 5, start: "15:50", end: "17:20", breakAfter: "10 мин" },
+      { number: 6, start: "17:30", end: "19:00", breakAfter: "—" },
+    ];
+    const news = [
+      { tag: "Важно", tone: "important", date: "18 марта 2026", title: "Изменение графика консультаций перед сессией", body: "Деканат информирует: консультации по дисциплинам 2 курса перенесены на 24–25 марта. Актуальный список аудиторий — в личном кабинете." },
+      { tag: "Сессия", tone: "session", date: "15 марта 2026", title: "Расписание зимней промежуточной аттестации", body: "Опубликовано расписание экзаменов и зачётов. Проверьте форму сдачи (очно / онлайн) и подготовьте документы для допуска." },
+      { tag: "Мероприятия", tone: "event", date: "12 марта 2026", title: "День открытых дверей МИБиУ", body: "22 марта в главном корпусе пройдёт встреча с абитуриентами и студентами. Регистрация на мастер-классы открыта до 20 марта." },
+      { tag: "Важно", tone: "important", date: "10 марта 2026", title: "Оплата обучения за весенний семестр", body: "Напоминаем о сроках оплаты. Квитанции доступны в разделе «Оплата обучения» на портале lk.mibiu.ru." },
+      { tag: "Мероприятия", tone: "event", date: "5 марта 2026", title: "Научная конференция студентов", body: "Приём тезисов до 28 марта. Лучшие доклады будут рекомендованы к публикации в сборнике института." },
+    ];
+
+    let selectedDay = 0;
+    let reminderEnabled = false;
+    let tab = 0;
+    let portalLoggedIn = false;
+    let toastTimer;
+    let nowTimer;
+    let nowElapsed = 56 * 60;
+    let nowLength = 90 * 60;
+    let isDark = true;
+    const groups = ["МН-21", "МН-22", "ЭК-11", "ИТ-31", "ЮР-24"];
+    let selectedGroup = "МН-21";
+    let gradeFilter = "all";
+    let gradeSubjects = [
+      { title: "Экономика и управление", teacher: "Иванова М. А.", control: "Экзамен", badge: "5 • Отлично", status: "done", score: 5, passed: true, note: "", open: false },
+      { title: "Менеджмент организации", teacher: "Петров С. В.", control: "Зачет", badge: "Зачтено", status: "pass", passed: true, note: "", open: false },
+      { title: "Финансовый учёт и анализ", teacher: "Сидорова Е. Н.", control: "Экзамен", badge: "4.5 • Хорошо", status: "done", score: 4.5, passed: true, note: "", open: false },
+      { title: "Правовое регулирование бизнеса", teacher: "Козлов А. Д.", control: "Зачет", badge: "Ожидает", status: "wait", passed: false, note: "", open: false },
+      { title: "Маркетинг и коммуникации", teacher: "Николаева О. И.", control: "Курсовая", badge: "Ожидает", status: "wait", passed: false, note: "Нужен реферат для автомата", open: false },
+      { title: "Информационные технологии", teacher: "Иванова М. А.", control: "Зачет", badge: "5 • Отлично", status: "done", score: 5, passed: true, note: "", open: false },
+      { title: "Деловой английский", teacher: "Brown J.", control: "Зачет", badge: "4.5 • Хорошо", status: "done", score: 4.5, passed: true, note: "", open: false },
+      { title: "Стратегическое планирование", teacher: "Орлова Т. К.", control: "Курсовая", badge: "Ожидает", status: "wait", passed: false, note: "", open: false },
+    ];
+
+    function setTheme(dark, announce = false) {
+      isDark = dark;
+      document.documentElement.dataset.theme = dark ? "dark" : "light";
+
+      const topIcon = document.getElementById("theme-icon");
+      topIcon.setAttribute("href", dark ? "#i-sun" : "#i-moon");
+      const topButton = document.getElementById("theme-toggle");
+      topButton.setAttribute("aria-label", dark ? "Светлая тема" : "Темная тема");
+
+      document.getElementById("dark-toggle").classList.toggle("on", dark);
+      const profileIcon = document.getElementById("theme-profile-icon");
+      profileIcon.setAttribute("href", dark ? "#i-moon" : "#i-sun");
+      [topIcon, profileIcon].forEach(el => {
+        el.classList.remove("theme-icon-pop");
+        el.getBoundingClientRect();
+        el.classList.add("theme-icon-pop");
+      });
+      document.getElementById("theme-subtitle").textContent = dark
+        ? "Тёмное оформление включено"
+        : "Светлое оформление";
+      if (announce) {
+        showToast(dark ? "Тёмная тема включена" : "Светлая тема включена");
+      }
+    }
+
+    function icon(id, cls) {
+      return `<svg class="ico ${cls || ""}"><use href="#i-${id}"></use></svg>`;
+    }
+
+    function showToast(text) {
+      const el = document.getElementById("toast");
+      el.textContent = text;
+      el.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => el.classList.remove("show"), 2000);
+    }
+
+    function renderPortalStatus() {
+      const status = document.getElementById("portal-status");
+      status.classList.toggle("pending", !portalLoggedIn);
+      status.innerHTML = portalLoggedIn
+        ? `${icon("check", "ico-sm")}Подключено • ONLINE`
+        : `${icon("alarm", "ico-sm")}Ожидает входа`;
+
+      document.getElementById("sync-dot").classList.toggle("pending", !portalLoggedIn);
+      document.getElementById("sync-title").textContent = portalLoggedIn
+        ? "Подключено • ONLINE"
+        : "Ожидает входа";
+
+      const badge = document.getElementById("sync-badge");
+      badge.classList.toggle("pending", !portalLoggedIn);
+      badge.textContent = portalLoggedIn ? "ONLINE" : "WAIT";
+    }
+
+    function renderGroupSelection() {
+      document.getElementById("group-value").textContent = selectedGroup;
+    }
+
+    function renderGroupList() {
+      const query = document.getElementById("group-search").value.trim().toLowerCase();
+      const filtered = groups.filter(group => group.toLowerCase().includes(query));
+      const list = document.getElementById("group-list");
+      if (!filtered.length) {
+        list.innerHTML = `<div class="sheet-empty">Группы не найдены</div>`;
+        return;
+      }
+      list.innerHTML = filtered.map(group => `
+        <div class="sheet-group ${group === selectedGroup ? "active" : ""}" data-group="${group}">
+          <span>${group}</span>${group === selectedGroup ? icon("check") : ""}
+        </div>`).join("");
+      list.querySelectorAll("[data-group]").forEach(item => {
+        item.onclick = () => {
+          selectedGroup = item.dataset.group;
+          renderGroupSelection();
+          renderGroupList();
+          closeGroupSheet();
+          showToast("Группа изменена на " + selectedGroup);
+        };
+      });
+    }
+
+    function openGroupSheet() {
+      document.getElementById("group-search").value = "";
+      renderGroupList();
+      document.getElementById("sheet-backdrop").classList.add("show");
+      document.getElementById("group-sheet").classList.add("show");
+      setTimeout(() => document.getElementById("group-search").focus(), 220);
+    }
+
+    function closeGroupSheet() {
+      document.getElementById("sheet-backdrop").classList.remove("show");
+      document.getElementById("group-sheet").classList.remove("show");
+      document.getElementById("group-search").blur();
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, char => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+      })[char]);
+    }
+
+    function updateCountdown() {
+      const date = new Date();
+      date.setDate(date.getDate() + 12);
+      const months = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
+      document.getElementById("countdown-date").textContent = `${date.getDate()} ${months[date.getMonth()]} • Ауд. 304`;
+      document.getElementById("countdown-days").textContent = "12 дн.";
+    }
+
+    function currentBellIndex() {
+      const now = new Date();
+      const minutes = now.getHours() * 60 + now.getMinutes();
+      for (let i = 0; i < bells.length; i++) {
+        if (minutes <= minutesOf(bells[i].end)) return i;
+      }
+      return 0;
+    }
+
+    function renderBellSheet() {
+      const active = currentBellIndex();
+      document.getElementById("bell-list").innerHTML = bells.map((bell, index) => `
+        <div class="bell-row ${index === active ? "active" : ""}">
+          <div class="bell-num">${bell.number}</div>
+          <div class="bell-main">
+            <div class="bell-title">${bell.number} пара</div>
+            <div class="bell-time">${bell.start}–${bell.end} • Перемена ${bell.breakAfter}</div>
+          </div>
+          <div class="bell-dot ${index === active ? "" : "placeholder"}"></div>
+        </div>`).join("");
+    }
+
+    function openBellSheet() {
+      closeGroupSheet();
+      closeGradebookSheet();
+      renderBellSheet();
+      document.getElementById("bell-backdrop").classList.add("show");
+      document.getElementById("bell-sheet").classList.add("show");
+    }
+
+    function closeBellSheet() {
+      document.getElementById("bell-backdrop").classList.remove("show");
+      document.getElementById("bell-sheet").classList.remove("show");
+    }
+
+    function setReminderEnabled(enabled) {
+      reminderEnabled = enabled;
+      document.querySelectorAll("#reminder-profile-toggle").forEach(node => {
+        node.classList.toggle("on", enabled);
+      });
+      if (enabled) {
+        showToast("Через 15 мин: Экономика и управление • Ауд. 304");
+      }
+    }
+
+    function renderGradeSummary() {
+      const scores = gradeSubjects.filter(item => item.score != null).map(item => item.score);
+      const average = scores.length ? scores.reduce((sum, score) => sum + score, 0) / scores.length : 0;
+      const passed = gradeSubjects.filter(item => item.passed).length;
+      document.getElementById("grade-average").textContent = average.toFixed(2);
+      document.getElementById("profile-average").textContent = average.toFixed(2);
+      document.getElementById("grade-progress").textContent = `${passed} из ${gradeSubjects.length} предметов`;
+      document.getElementById("grade-progress-bar").style.width = `${(passed / gradeSubjects.length * 100).toFixed(0)}%`;
+    }
+
+    function renderGradeList() {
+      const list = document.getElementById("grade-list");
+      const filtered = gradeSubjects
+        .map((subject, index) => ({ subject, index }))
+        .filter(({ subject }) => gradeFilter === "all"
+          || (gradeFilter === "done" && subject.passed)
+          || (gradeFilter === "pending" && !subject.passed));
+
+      if (!filtered.length) {
+        list.innerHTML = `<div class="sheet-empty">Предметов не найдено</div>`;
+        return;
+      }
+
+      list.innerHTML = filtered.map(({ subject, index }) => `
+        <div class="subject ${subject.open ? "open" : ""}">
+          <div class="subject-head" data-toggle="${index}">
+            <div class="subject-main">
+              <div class="subject-title">${escapeHtml(subject.title)}</div>
+              <div class="subject-meta">${escapeHtml(subject.teacher)} • ${escapeHtml(subject.control)}</div>
+            </div>
+            <span class="subject-badge ${subject.status}">${escapeHtml(subject.badge)}</span>
+            ${subject.note ? icon("note", "note-flag") : ""}
+            ${icon("chevron", "chev-rot")}
+          </div>
+          <div class="subject-details">
+            <button class="mark-passed" type="button" data-pass="${index}" ${subject.passed ? "disabled" : ""}>
+              ${subject.passed ? "Уже сдано" : "Отметить как сданный"}
+            </button>
+            <textarea class="note-input" data-note="${index}" placeholder="Короткая заметка по предмету">${escapeHtml(subject.note)}</textarea>
+            <button class="save-note" type="button" data-save="${index}">Сохранить заметку</button>
+          </div>
+        </div>`).join("");
+
+      list.querySelectorAll("[data-toggle]").forEach(node => {
+        node.onclick = () => {
+          const index = +node.dataset.toggle;
+          gradeSubjects[index].open = !gradeSubjects[index].open;
+          renderGradeList();
+        };
+      });
+      list.querySelectorAll("[data-pass]").forEach(button => {
+        button.onclick = () => {
+          const index = +button.dataset.pass;
+          const subject = gradeSubjects[index];
+          if (subject.passed) return;
+          subject.passed = true;
+          subject.status = "pass";
+          subject.badge = "Зачтено";
+          renderGradeSummary();
+          renderGradeList();
+          showToast("Предмет отмечен как сданный");
+        };
+      });
+      list.querySelectorAll("[data-save]").forEach(button => {
+        button.onclick = () => {
+          const index = +button.dataset.save;
+          const input = list.querySelector(`[data-note="${index}"]`);
+          gradeSubjects[index].note = input.value.trim();
+          renderGradeList();
+          showToast(gradeSubjects[index].note ? "Заметка сохранена" : "Заметка удалена");
+        };
+      });
+    }
+
+    function openGradebookSheet() {
+      closeGroupSheet();
+      renderGradeSummary();
+      renderGradeList();
+      document.getElementById("gradebook-backdrop").classList.add("show");
+      document.getElementById("gradebook-sheet").classList.add("show");
+    }
+
+    function closeGradebookSheet() {
+      document.getElementById("gradebook-backdrop").classList.remove("show");
+      document.getElementById("gradebook-sheet").classList.remove("show");
+    }
+
+    function minutesOf(value) {
+      const parts = value.split(":").map(Number);
+      return parts[0] * 60 + parts[1];
+    }
+
+    function formatGap(minutes) {
+      if (minutes < 60) return minutes + " мин";
+      const hours = Math.floor(minutes / 60);
+      const rest = minutes % 60;
+      return rest === 0 ? hours + " ч" : hours + " ч " + rest + " мин";
+    }
+
+    function updateAppBar() {
+      document.getElementById("appbar").classList.toggle(
+        "compact",
+        document.getElementById("content").scrollTop > 36,
+      );
+    }
+
+    function simulateRefresh() {
+      const message = tab === 0
+        ? "Расписание актуально"
+        : tab === 1
+          ? "Новости актуальны"
+          : "Данные актуальны";
+      setTimeout(() => showToast(message), 800);
+    }
+
+    function renderNav() {
+      document.getElementById("nav").innerHTML = navItems.map((item, i) => `
+        <button class="${i === tab ? "active" : ""}" data-tab="${i}">
+          <span class="icon">${icon(item.icon)}</span>
+          <span class="dot"></span>
+          <span class="label">${item.label}</span>
+        </button>`).join("");
+      document.querySelectorAll("#nav button").forEach(btn => {
+        btn.onclick = () => {
+          tab = +btn.dataset.tab;
+          closeGroupSheet();
+          closeGradebookSheet();
+          closeBellSheet();
+          document.getElementById("schedule-controls").classList.toggle("hidden", tab !== 0);
+          document.getElementById("title").textContent = titles[tab];
+          document.querySelectorAll("#nav button").forEach((b, i) => {
+            b.classList.toggle("active", i === tab);
+          });
+          [0,1,2,3].forEach(i => {
+            const section = document.getElementById("tab-" + i);
+            section.classList.toggle("tab-active", i === tab);
+            section.classList.toggle("tab-hidden", i !== tab);
+          });
+          const content = document.getElementById("content");
+          content.scrollTop = 0;
+          if (tab === 1) renderNews();
+          updateAppBar();
+        };
+      });
+    }
+
+    function renderWeek() {
+      document.getElementById("week").innerHTML = days.map((d, i) => `
+        <button class="day ${i === selectedDay ? "active" : ""}" data-day="${i}">
+          <div class="lbl">${d.label}</div><div class="num">${d.date}</div>
+        </button>`).join("");
+      document.querySelectorAll(".day").forEach(btn => {
+        btn.onclick = () => {
+          selectedDay = +btn.dataset.day;
+          renderWeek();
+          renderLessons();
+        };
+      });
+    }
+
+    function updateNow() {
+      const remaining = nowLength - nowElapsed;
+      const minutes = Math.floor(remaining / 60) + (remaining % 60 > 0 ? 1 : 0);
+      const progress = Math.min(1, nowElapsed / nowLength);
+      document.getElementById("now-remaining").textContent = `Осталось ${minutes} мин`;
+      document.getElementById("now-percent").textContent = `${Math.round(progress * 100)}%`;
+      document.getElementById("now-bar").style.width = `${(progress * 100).toFixed(2)}%`;
+    }
+
+    function startNow(lesson, nextLesson) {
+      const length = (minutesOf(lesson.end) - minutesOf(lesson.start)) * 60;
+      nowLength = length > 0 ? length : 90 * 60;
+      nowElapsed = Math.min(56 * 60, nowLength);
+      document.getElementById("now-title").textContent = lesson.subject;
+      document.getElementById("now-time-inline").textContent = `${lesson.start}–${lesson.end}`;
+      document.getElementById("now-room").textContent = lesson.room;
+      document.getElementById("now-type").textContent = lesson.type;
+      document.getElementById("now-teacher").textContent = lesson.teacher;
+      document.getElementById("now-next").textContent = nextLesson
+        ? `Далее в ${nextLesson.start}: ${nextLesson.subject} • ${nextLesson.room}`
+        : "Далее: пар на сегодня больше нет";
+      updateNow();
+      clearInterval(nowTimer);
+      nowTimer = setInterval(() => {
+        if (nowElapsed < nowLength) {
+          nowElapsed += 1;
+          updateNow();
+        }
+      }, 1000);
+    }
+
+    function renderLessons() {
+      const list = lessons[selectedDay] || [];
+      const nowCard = document.getElementById("now-card");
+      if (list.length) {
+        nowCard.classList.remove("hidden");
+        startNow(list[0], list[1]);
+      } else {
+        nowCard.classList.add("hidden");
+        clearInterval(nowTimer);
+      }
+
+      const chunks = [];
+      list.forEach((l, i) => {
+        chunks.push(`
+          <div class="lesson" style="animation-delay:${i * 50}ms">
+            <div class="time"><div class="start">${l.start}</div><div class="end">${l.end}</div></div>
+            <div class="card">
+              <div class="card-main">
+                <div class="stripe" style="background:var(--${l.tone})"></div>
+                <div class="card-body lesson-head" data-toggle="${i}">
+                  <div class="meta">
+                    <span class="badge-type" style="color:var(--${l.tone});background:var(--${l.tone}-soft);border-color:var(--${l.tone}-border)">${l.type}</span>
+                    <span class="chev">⌄</span>
+                  </div>
+                  <div class="subj">${l.subject}</div>
+                  <div class="room-line">${l.room} • ${l.teacher}</div>
+                </div>
+              </div>
+              <div class="lesson-details-wrap">
+                <div class="lesson-details">
+                  <div class="lesson-details-inner">
+                    <div style="font-size:12px;color:var(--muted)">Корпус: ${l.room}</div>
+                    <button class="detail-btn" data-open-lk="${i}" type="button">Открыть в ЛК / Ссылка</button>
+                    <input aria-label="Заметка к паре" placeholder="Быстрая заметка к паре" />
+                    <button class="detail-btn secondary" data-copy="${i}" type="button">Копировать детали</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>`);
+        if (i + 1 < list.length) {
+          const gap = minutesOf(list[i + 1].start) - minutesOf(l.end);
+          if (gap > 30) {
+            chunks.push(`
+              <div class="break-card" style="animation-delay:${i * 50 + 25}ms">
+                <span>☕</span><span>Окно между парами • ${formatGap(gap)}</span>
+              </div>`);
+          }
+        }
+      });
+
+      document.getElementById("timeline").innerHTML = chunks.length
+        ? chunks.join("")
+        : `<div class="empty">${icon("calendar")}<span>В этот день пар нет</span></div>`;
+
+      document.querySelectorAll("[data-toggle]").forEach(head => {
+        head.onclick = () => head.closest(".lesson").classList.toggle("open");
+      });
+      document.querySelectorAll("[data-open-lk]").forEach(btn => {
+        btn.onclick = () => showToast("Открываем пару в личном кабинете");
+      });
+      document.querySelectorAll("[data-copy]").forEach(btn => {
+        btn.onclick = () => {
+          const l = list[+btn.dataset.copy];
+          const text = l.subject + " · " + l.type + " · " + l.start + "—" + l.end + " · " + l.room + " · " + l.teacher;
+          if (navigator.clipboard) navigator.clipboard.writeText(text).catch(() => {});
+          showToast("Детали пары скопированы");
+        };
+      });
+    }
+
+    function renderNews() {
+      document.getElementById("news").innerHTML = news.map((n, i) => `
+        <div class="news" data-news="${i}" style="animation-delay:${i * 45}ms">
+          <div class="news-top">
+            <span class="badge" style="color:var(--${n.tone});background:var(--${n.tone}-soft);border-color:var(--${n.tone}-border)">${n.tag}</span>
+            <span class="date">${n.date}</span>
+          </div>
+          <h3>${n.title}</h3><p>${n.body}</p>
+        </div>`).join("");
+      document.querySelectorAll("[data-news]").forEach(card => {
+        card.onclick = () => {
+          const n = news[+card.dataset.news];
+          showToast(n.tag + " · " + n.date + " · " + n.title);
+        };
+      });
+    }
+
+    const content = document.getElementById("content");
+    const refreshIndicator = document.getElementById("refresh-indicator");
+    let pullStart = null;
+
+    content.addEventListener("scroll", updateAppBar);
+    content.addEventListener("pointerdown", event => {
+      if (content.scrollTop <= 0) pullStart = event.clientY;
+    });
+    content.addEventListener("pointermove", event => {
+      if (pullStart !== null && event.clientY - pullStart > 24) {
+        refreshIndicator.classList.add("show");
+      }
+    });
+    const endPull = event => {
+      if (pullStart === null) return;
+      const delta = event.clientY - pullStart;
+      pullStart = null;
+      refreshIndicator.classList.remove("show");
+      if (delta > 60) simulateRefresh();
+    };
+    content.addEventListener("pointerup", endPull);
+    content.addEventListener("pointercancel", () => {
+      pullStart = null;
+      refreshIndicator.classList.remove("show");
+    });
+
+    document.getElementById("portal-button").onclick = () => {
+      portalLoggedIn = true;
+      renderPortalStatus();
+      showToast("Подключено к https://lk.mibiu.ru");
+    };
+    document.querySelectorAll(".qlink").forEach(link => {
+      link.onclick = () => {
+        if (link.dataset.title === "Зачетка") {
+          openGradebookSheet();
+        } else {
+          showToast(link.dataset.title + ": раздел откроется через WebView");
+        }
+      };
+    });
+    document.querySelectorAll(".task-row").forEach(row => {
+      row.onclick = () => showToast("Открытие задания в портале lk.mibiu.ru...");
+    });
+    document.getElementById("copy-email").onclick = () => {
+      const email = "dekanat@mibiu.ru";
+      if (navigator.clipboard) navigator.clipboard.writeText(email).catch(() => {});
+      showToast("Почта деканата скопирована");
+    };
+    document.getElementById("notif").onclick = function () { this.classList.toggle("on"); };
+    document.getElementById("bell-open").onclick = openBellSheet;
+    document.getElementById("bell-close").onclick = closeBellSheet;
+    document.getElementById("bell-backdrop").onclick = closeBellSheet;
+    document.getElementById("reminder-profile-toggle").onclick = () => setReminderEnabled(!reminderEnabled);
+    document.getElementById("test-reminder").onclick = () => showToast("Через 15 мин: Экономика и управление • Ауд. 304");
+    document.getElementById("theme-toggle").onclick = () => setTheme(!isDark, true);
+    document.getElementById("dark-toggle").onclick = () => setTheme(!isDark, true);
+
+    document.getElementById("group-picker-open").onclick = openGroupSheet;
+    document.getElementById("sheet-close").onclick = closeGroupSheet;
+    document.getElementById("sheet-backdrop").onclick = closeGroupSheet;
+    document.getElementById("group-search").oninput = renderGroupList;
+
+    document.getElementById("gradebook-close").onclick = closeGradebookSheet;
+    document.getElementById("gradebook-backdrop").onclick = closeGradebookSheet;
+    document.querySelectorAll(".grade-filter").forEach(button => {
+      button.onclick = () => {
+        gradeFilter = button.dataset.filter;
+        document.querySelectorAll(".grade-filter").forEach(item => {
+          item.classList.toggle("active", item === button);
+        });
+        renderGradeList();
+      };
+    });
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") {
+        closeGroupSheet();
+        closeGradebookSheet();
+        closeBellSheet();
+      }
+    });
+
+    document.getElementById("sync-schedule").onclick = () => {
+      const node = document.getElementById("sync-icon");
+      node.classList.remove("spin");
+      void node.offsetWidth;
+      node.classList.add("spin");
+      setTimeout(() => showToast("Расписание синхронизировано"), 800);
+    };
+    document.getElementById("clear-cache").onclick = () => showToast("Кэш очищен");
+    document.getElementById("logout").onclick = () => showToast("Выход из аккаунта МИБиУ");
+
+    setTheme(true);
+    updateCountdown();
+    renderGroupSelection();
+    renderPortalStatus();
+    renderGradeSummary();
+    renderNav(); renderWeek(); renderLessons(); renderNews(); updateAppBar();
+  </script>
+</body>
+</html>
